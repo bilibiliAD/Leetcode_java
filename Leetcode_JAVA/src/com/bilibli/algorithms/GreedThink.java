@@ -27,4 +27,30 @@ public class GreedThink {
 //        return j;    应该返回i（孩子的个数）。而不是饼干的个数
         return i;
     }
+
+
+    /*
+    * 投飞镖刺破气球
+     Minimum Number of Arrows to Burst Balloons
+      day6
+    * */
+    public int findMinArrowShots(int[][] points) {
+        if (points.length == 0) {
+            return 0;
+        }
+        Arrays.sort(points,(a,b) -> (a[1] - b[1]));
+        int ret = 1;
+        int point = points[0][1];
+        for(int i = 1;i<points.length;i++){
+            if(points[i][0]<=point){
+                continue;
+            }
+            point = points[i][1];
+            ret++;
+        }
+        return ret;
+
+    }
+
+
 }

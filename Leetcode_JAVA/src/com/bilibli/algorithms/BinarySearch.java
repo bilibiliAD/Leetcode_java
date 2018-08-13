@@ -49,4 +49,42 @@ public class BinarySearch {
     }
 
 
+    /*
+     * Arranging Coins (Easy)
+     * 摆硬币
+     * */
+    public int arrangeCoins(int n) {
+        int level = 1;
+        if (n == 1) {
+            return n;
+        }
+        while (0 < n) {
+            n -= level;
+            level++;
+        }
+        return n == 0 ? level - 1 : level - 2;
+    }
+
+    /*
+    * Single Element in a Sorted Array (Medium)
+    * 一个有序数组只有一个数不出现两次，找出这个数。
+    * */
+    public int singleNonDuplicate(int[] nums) {
+        int l = 0;
+        int h = nums.length - 1;
+        while (l < h) {
+            int mid = l + (h - l) / 2;
+            if (mid % 2 == 1) {
+                mid--;
+            }
+            if(nums[mid]==nums[mid+1]){
+                l = mid+2;
+            }else {
+                h = mid;
+            }
+        }
+        return nums[l];
+    }
 }
+
+
