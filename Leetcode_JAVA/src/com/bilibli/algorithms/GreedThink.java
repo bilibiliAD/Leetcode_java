@@ -38,11 +38,11 @@ public class GreedThink {
         if (points.length == 0) {
             return 0;
         }
-        Arrays.sort(points,(a,b) -> (a[1] - b[1]));
+        Arrays.sort(points, (a, b) -> (a[1] - b[1]));
         int ret = 1;
         int point = points[0][1];
-        for(int i = 1;i<points.length;i++){
-            if(points[i][0]<=point){
+        for (int i = 1; i < points.length; i++) {
+            if (points[i][0] <= point) {
                 continue;
             }
             point = points[i][1];
@@ -52,5 +52,51 @@ public class GreedThink {
 
     }
 
+    /*
+    *股票的最大收益
+     Best Time to Buy and Sell Stock II (Easy)
+    day7
+    * */
+    public int maxProfit(int[] prices) {
+        //假设数组是有序的，prices[i] <= prices[i+1]
+        int profit = 0;
+//        for (int i = 0; i < prices.length; i++) {
+        //后面的减去前面的如果大于0
+        for (int i = 1; i < prices.length; i++) {
+//            if (prices[i +1 ] - prices[i] > 0) {
+            if (prices[i] - prices[i - 1] > 0) {
+                profit += prices[i] - prices[i - 1];
+            }
+        }
+        return profit;
+    }
+
+    /*
+       *种植花朵
+        Can Place Flowers (Easy)
+       day8
+       * */
+    public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int cnt = 0;
+        for (int i = 0; i < flowerbed.length; i++) {
+            //  if (i == 0) { //如果已经种花，则跳过当前这株
+            if (flowerbed[i] == 1) {
+                continue;
+            }
+            //判断花朵前后是不是0（有空位）
+            int pre = i == 0 ? 0 : flowerbed[i - 1];
+//            int next = i == flowerbed.length - 1 ? flowerbed[i + 1] : 0;
+//            如果i到达尾端则next设置为0
+            int next = i == flowerbed.length - 1 ? 0 : flowerbed[i + 1];
+            //如果有空位，则可以插入花朵
+            if (pre == 0 && next == 0) {
+                cnt++;
+                flowerbed[i] = 1;
+            }
+        }
+        return cnt >= n;
+    }
+
 
 }
+

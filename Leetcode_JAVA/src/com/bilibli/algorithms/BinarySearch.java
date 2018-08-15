@@ -68,6 +68,7 @@ public class BinarySearch {
     /*
     * Single Element in a Sorted Array (Medium)
     * 一个有序数组只有一个数不出现两次，找出这个数。
+    1 1 2 3 3 4 4
     * */
     public int singleNonDuplicate(int[] nums) {
         int l = 0;
