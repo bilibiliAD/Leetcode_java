@@ -98,5 +98,26 @@ public class GreedThink {
     }
 
 
+    /*
+           *修改一个数成为非递减数组
+            Non-decreasing Array (Easy)
+           day10
+           * */
+    public boolean checkPossibility(int[] nums) {
+        int cut = 0;
+        for(int i = 0;i<nums.length;i++){
+            if(nums[i]<nums[i-1]){
+                cut++;
+                if(i-2>=0&& nums[i]<nums[i-2]){
+                    nums[i] = nums[i-1];
+                }else {
+                    nums[i-1] = nums[i];
+                }
+            }
+        }
+        return cut<=1;
+    }
+
+
 }
 
