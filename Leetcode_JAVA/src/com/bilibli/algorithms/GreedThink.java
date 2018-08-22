@@ -1,6 +1,9 @@
 package com.bilibli.algorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 /*
  *       贪心思想
@@ -99,25 +102,59 @@ public class GreedThink {
 
 
     /*
-           *修改一个数成为非递减数组
-            Non-decreasing Array (Easy)
+    修改一个数成为非递减数组
+    Non-decreasing Array (Easy)
            day10
            * */
     public boolean checkPossibility(int[] nums) {
         int cut = 0;
-        for(int i = 0;i<nums.length;i++){
-            if(nums[i]<nums[i-1]){
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < nums[i - 1]) {
                 cut++;
-                if(i-2>=0&& nums[i]<nums[i-2]){
-                    nums[i] = nums[i-1];
-                }else {
-                    nums[i-1] = nums[i];
+                if (i - 2 >= 0 && nums[i] < nums[i - 2]) {
+                    nums[i] = nums[i - 1];
+                } else {
+                    nums[i - 1] = nums[i];
                 }
             }
         }
-        return cut<=1;
+        return cut <= 1;
     }
 
+    /*
+    * 判断是否为子串
+    Is Subsequence (Medium)
+    day11
+    * */
+    public boolean isSubsequence(String s, String t) {
+        for (int i = 0, j = 0; i < s.length(); i++, j++) {
+            j = s.indexOf(t.charAt(i), j);
+            if (j == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
 
+    /*
+    * 根据身高和序号重组队列
+    406. Queue Reconstruction by Height(Medium)
+    day12
+    * */
+    public int[][] reconstructQueue(int[][] people) {
+        if (people == null || people.length == 0 || people[0] == null) {
+            return new int[0][0];
+//       应该初始化大小     return new int[][];
+        }
+        Arrays.sort(people, (a, b) -> (a[0] == b[0] ? a[1] - b[1] : b[0] - a[0]));
+
+//     加泛型   List queue = new ArrayList();
+        List<int[]> queue = new ArrayList<>();
+        for (int[] p : people) {
+            queue.add(p[1], p);
+        }
+        return queue.toArray(new int[queue.size()][]);
+    }
 }
+
 
